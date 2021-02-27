@@ -1,24 +1,19 @@
 package es.urjc.code.ejem1.controller;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import es.urjc.code.ejem1.controller.dto.ProductRequestDTO;
+import es.urjc.code.ejem1.controller.dto.ProductResponseDTO;
+import es.urjc.code.ejem1.domain.Service.ProductService;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
+import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import es.urjc.code.ejem1.domain.FullProductDTO;
-import es.urjc.code.ejem1.domain.ProductDTO;
-import es.urjc.code.ejem1.domain.ProductService;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api/products")

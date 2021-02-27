@@ -1,9 +1,9 @@
 package es.urjc.code.ejem1.sink;
 
-import es.urjc.code.ejem1.domain.CompletedCart;
-import es.urjc.code.ejem1.domain.CompletedCartDTO;
-import es.urjc.code.ejem1.domain.CompletedCartRepository;
-import es.urjc.code.ejem1.domain.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.dto.CompletedCartDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.model.CompletedCart;
+import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

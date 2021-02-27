@@ -1,12 +1,11 @@
 package es.urjc.code.ejem1;
 
-import es.urjc.code.ejem1.domain.*;
-import es.urjc.code.ejem1.infrastructure.SpringDataJPACompletedCartRepositoryAdapter;
-import org.springframework.context.annotation.Bean;
-
-import es.urjc.code.ejem1.infrastructure.SpringDataJPAProductRepositoryAdapter;
-import es.urjc.code.ejem1.infrastructure.SpringDataJPAShoppingCartRepositoryAdapter;
+import es.urjc.code.ejem1.domain.Service.*;
+import es.urjc.code.ejem1.infrastructure.adapter.SpringDataJPACompletedCartRepositoryAdapter;
+import es.urjc.code.ejem1.infrastructure.adapter.SpringDataJPAProductRepositoryAdapter;
+import es.urjc.code.ejem1.infrastructure.adapter.SpringDataJPAShoppingCartRepositoryAdapter;
 import es.urjc.code.ejem1.service.ValidationServiceImpl;
+import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {

@@ -1,13 +1,12 @@
 package es.urjc.code.ejem1;
 
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
+import es.urjc.code.ejem1.domain.model.Product;
+import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
-
-import es.urjc.code.ejem1.domain.FullProductDTO;
-import es.urjc.code.ejem1.domain.Product;
-import es.urjc.code.ejem1.domain.ProductRepository;
 
 @Controller
 public class DatabaseLoader implements CommandLineRunner {

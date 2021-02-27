@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import java.util.Random;
 
+import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -13,15 +14,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.modelmapper.ModelMapper;
 
-import es.urjc.code.ejem1.domain.FullProductDTO;
-import es.urjc.code.ejem1.domain.FullShoppingCartDTO;
-import es.urjc.code.ejem1.domain.FullShoppingCartItemDTO;
-import es.urjc.code.ejem1.domain.Product;
-import es.urjc.code.ejem1.domain.ProductDTO;
-import es.urjc.code.ejem1.domain.ProductRepository;
-import es.urjc.code.ejem1.domain.ProductServiceImpl;
-import es.urjc.code.ejem1.domain.ShoppingCartRepository;
-import es.urjc.code.ejem1.domain.ShoppingCartServiceImpl;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
+import es.urjc.code.ejem1.domain.model.Product;
+import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import es.urjc.code.ejem1.domain.repository.ProductRepository;
+import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
+import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
+import es.urjc.code.ejem1.domain.Service.ShoppingCartServiceImpl;
 import es.urjc.code.ejem1.service.ValidationServiceImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -53,7 +54,8 @@ public class ShoppingCartService {
 	@Order(1)
 	void shoppingCartCanBeAdded() {
 		createdShoppingCart = shoppingCartService.createShoppingCart();
-		verify(shoppingCartRepository).save(createdShoppingCart);
+		boolean isCompleted = createdShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED;
+		verify(shoppingCartRepository).save(createdShoppingCart, isCompleted);
 	}
 	
 	@Test

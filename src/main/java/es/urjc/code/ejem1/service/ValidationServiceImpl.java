@@ -1,10 +1,10 @@
 package es.urjc.code.ejem1.service;
 
+import es.urjc.code.ejem1.domain.Service.ValidationService;
+import es.urjc.code.ejem1.domain.model.ShoppingCartItem;
+
 import java.util.List;
 import java.util.Random;
-
-import es.urjc.code.ejem1.domain.ShoppingCartItem;
-import es.urjc.code.ejem1.domain.ValidationService;
 
 public class ValidationServiceImpl implements ValidationService {
 

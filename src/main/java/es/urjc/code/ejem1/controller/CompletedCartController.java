@@ -1,9 +1,11 @@
 package es.urjc.code.ejem1.controller;
 
-import es.urjc.code.ejem1.domain.CompletedCartDTO;
-import es.urjc.code.ejem1.domain.CompletedCartService;
+import es.urjc.code.ejem1.controller.dto.CompletedCartResponseDTO;
+import es.urjc.code.ejem1.domain.Service.CompletedCartService;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.Collection;

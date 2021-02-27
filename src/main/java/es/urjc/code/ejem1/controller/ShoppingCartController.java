@@ -1,24 +1,18 @@
 package es.urjc.code.ejem1.controller;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-
-import java.net.URI;
-
+import es.urjc.code.ejem1.controller.dto.ShoppingCartRequestDTO;
+import es.urjc.code.ejem1.controller.dto.ShoppingCartResponseDTO;
+import es.urjc.code.ejem1.domain.Service.ShoppingCartService;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import es.urjc.code.ejem1.domain.FullShoppingCartDTO;
-import es.urjc.code.ejem1.domain.ShoppingCartDTO;
-import es.urjc.code.ejem1.domain.ShoppingCartService;
+import java.net.URI;
+
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api/shoppingcarts")

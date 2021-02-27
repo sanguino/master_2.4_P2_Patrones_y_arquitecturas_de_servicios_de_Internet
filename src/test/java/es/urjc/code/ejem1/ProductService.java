@@ -10,11 +10,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.modelmapper.ModelMapper;
 
-import es.urjc.code.ejem1.domain.FullProductDTO;
-import es.urjc.code.ejem1.domain.Product;
-import es.urjc.code.ejem1.domain.ProductDTO;
-import es.urjc.code.ejem1.domain.ProductRepository;
-import es.urjc.code.ejem1.domain.ProductServiceImpl;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
+import es.urjc.code.ejem1.domain.model.Product;
+import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import es.urjc.code.ejem1.domain.repository.ProductRepository;
+import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ProductService {
