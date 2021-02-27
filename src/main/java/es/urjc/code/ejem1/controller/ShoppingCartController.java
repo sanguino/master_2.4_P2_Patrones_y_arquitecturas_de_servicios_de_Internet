@@ -37,7 +37,7 @@ public class ShoppingCartController {
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
-	public ShoppingCartResponseDTO getShoppingCart(
+	public ShoppingCartResponseDTO addProductInShoppingCart(
 	        @PathVariable Long idShoppingCart,
 	        @PathVariable Long idProduct,
 	        @PathVariable int quantity) {
