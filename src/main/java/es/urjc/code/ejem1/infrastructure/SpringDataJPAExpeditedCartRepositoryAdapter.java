@@ -1,8 +1,8 @@
 package es.urjc.code.ejem1.infrastructure;
 
+import es.urjc.code.ejem1.domain.ExpeditedCartDTO;
 import es.urjc.code.ejem1.domain.ExpeditedCartRepository;
 import es.urjc.code.ejem1.domain.FullExpeditedCartDTO;
-import es.urjc.code.ejem1.domain.FullProductDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class SpringDataJPAExpeditedCartRepositoryAdapter implements ExpeditedCar
 	}
 
 	@Override
-	public FullExpeditedCartDTO save(FullExpeditedCartDTO cart) {
+	public FullExpeditedCartDTO save(ExpeditedCartDTO cart) {
 		ExpeditedCartEntity expeditedCartEntity = mapper.map(cart, ExpeditedCartEntity.class);
 		repository.save(expeditedCartEntity);
 

@@ -5,5 +5,5 @@ import java.util.Collection;
 public interface ExpeditedCartRepository {
 	Collection<FullExpeditedCartDTO> findAll();
 
-	FullExpeditedCartDTO save(FullExpeditedCartDTO cart);
+	FullExpeditedCartDTO save(ExpeditedCartDTO cart);
 }

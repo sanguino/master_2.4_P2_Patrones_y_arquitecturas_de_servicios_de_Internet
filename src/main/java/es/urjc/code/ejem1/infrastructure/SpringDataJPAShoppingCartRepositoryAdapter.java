@@ -1,6 +1,8 @@
 package es.urjc.code.ejem1.infrastructure;
 
+import es.urjc.code.ejem1.domain.ShoppingCartStatus;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import es.urjc.code.ejem1.domain.FullShoppingCartDTO;
@@ -11,9 +13,11 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 
 	private SpringDataJPAShoppingCartRepository repository;
 	private ModelMapper mapper = new ModelMapper();
+	private final ApplicationEventPublisher applicationEventPublisher;
 
-	public SpringDataJPAShoppingCartRepositoryAdapter(SpringDataJPAShoppingCartRepository repository) {
+	public SpringDataJPAShoppingCartRepositoryAdapter(SpringDataJPAShoppingCartRepository repository, ApplicationEventPublisher applicationEventPublisher) {
 		this.repository = repository;
+		this.applicationEventPublisher = applicationEventPublisher;
 	}
 
 	@Override
@@ -26,6 +30,10 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 	public FullShoppingCartDTO save(FullShoppingCartDTO shoppingCart) {
 		ShoppingCartEntity shoppingCartEntity = mapper.map(shoppingCart, ShoppingCartEntity.class);
 		repository.save(shoppingCartEntity);
+
+		if (shoppingCart.getStatus() == ShoppingCartStatus.COMPLETED) {
+			applicationEventPublisher.publishEvent(shoppingCart);
+		}
 
 		return findById(shoppingCartEntity.getId());
 	}
