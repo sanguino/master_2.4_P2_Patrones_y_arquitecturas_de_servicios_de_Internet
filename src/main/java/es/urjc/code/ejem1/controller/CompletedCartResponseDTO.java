@@ -1,22 +1,12 @@
-package es.urjc.code.ejem1.infrastructure;
+package es.urjc.code.ejem1.controller;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+public class CompletedCartResponseDTO {
 
-@Entity
-public class ExpeditedCartEntity {
-  @Id
   private Long cartId;
-
   private double expenditure;
 
-  public ExpeditedCartEntity() {
+  public CompletedCartResponseDTO() {
     super();
-  }
-
-  public ExpeditedCartEntity(Long cartId, double expenditure) {
-    this.cartId = cartId;
-    this.expenditure = expenditure;
   }
 
   public Long getCartId() {
@@ -34,4 +24,5 @@ public class ExpeditedCartEntity {
   public void setExpenditure(double expenditure) {
     this.expenditure = expenditure;
   }
+
 }

@@ -1,7 +1,7 @@
 package es.urjc.code.ejem1;
 
 import es.urjc.code.ejem1.domain.*;
-import es.urjc.code.ejem1.infrastructure.SpringDataJPAExpeditedCartRepositoryAdapter;
+import es.urjc.code.ejem1.infrastructure.SpringDataJPACompletedCartRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 
 import es.urjc.code.ejem1.infrastructure.SpringDataJPAProductRepositoryAdapter;
@@ -22,10 +22,10 @@ public class Configuration {
 	}
 
 	@Bean
-	public ExpeditedCartService expeditedCartService(
-			SpringDataJPAExpeditedCartRepositoryAdapter expeditedCartRepositoryAdapter) {
-		return new ExpeditedCartServiceImpl(
-				expeditedCartRepositoryAdapter);
+	public CompletedCartService completedCartService(
+			SpringDataJPACompletedCartRepositoryAdapter completedCartRepositoryAdapter) {
+		return new CompletedCartServiceImpl(
+				completedCartRepositoryAdapter);
 	}
 
 	@Bean

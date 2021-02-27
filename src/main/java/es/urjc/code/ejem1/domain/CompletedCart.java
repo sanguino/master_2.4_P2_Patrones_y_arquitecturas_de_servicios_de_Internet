@@ -3,16 +3,16 @@ package es.urjc.code.ejem1.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpeditedCart {
+public class CompletedCart {
 
 	private Long cartId;
 	private double expenditure;
 
-	public ExpeditedCart() {
+	public CompletedCart() {
 		super();
 	}
 
-	public ExpeditedCart(Long cartId, double expenditure) {
+	public CompletedCart(Long cartId, double expenditure) {
 		this.cartId = cartId;
 		this.expenditure = expenditure;
 	}

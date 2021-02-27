@@ -1,11 +1,11 @@
 package es.urjc.code.ejem1.domain;
 
-public class FullExpeditedCartDTO {
+public class FullCompletedCartDTO {
 
 	private Long cartId;
 	private double expenditure;
 
-	public FullExpeditedCartDTO() {
+	public FullCompletedCartDTO() {
 		super();
 	}
 

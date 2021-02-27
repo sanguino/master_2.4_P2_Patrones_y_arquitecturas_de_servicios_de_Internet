@@ -1,15 +1,15 @@
 package es.urjc.code.ejem1.domain;
 
-public class ExpeditedCartDTO {
+public class CompletedCartDTO {
 
 	private Long cartId;
 	private double expenditure;
 
-	public ExpeditedCartDTO() {
+	public CompletedCartDTO() {
 		super();
 	}
 
-	public ExpeditedCartDTO(Long cartId, double expenditure) {
+	public CompletedCartDTO(Long cartId, double expenditure) {
 		this.cartId = cartId;
 		this.expenditure = expenditure;
 	}
