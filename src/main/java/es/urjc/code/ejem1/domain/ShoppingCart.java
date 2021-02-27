@@ -8,6 +8,7 @@ public class ShoppingCart {
 	private Long id;
 	private ShoppingCartStatus status;
 	private List<ShoppingCartItem> items;
+	private double price;
 
 	private ValidationService validationService;
 
@@ -16,6 +17,7 @@ public class ShoppingCart {
 
 		this.status = ShoppingCartStatus.PENDING;
 		this.items = new ArrayList<>();
+		this.price = 0;
 	}
 
 	public Long getId() {
@@ -42,6 +44,14 @@ public class ShoppingCart {
 		this.items = items;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	public ValidationService getValidationService() {
 		return validationService;
 	}
@@ -52,13 +62,15 @@ public class ShoppingCart {
 
 	public void addItem(ShoppingCartItem shoppingCartItem) {
 		this.items.add(shoppingCartItem);
+		this.price = this.calculatePrice();
 	}
 
 	public void removeItem(Long idProduct) {
 		this.items.removeIf(item -> item.getProduct().getId().equals(idProduct));
+		this.price = this.calculatePrice();
 	}
 
-	public double getPrice() {
+	public double calculatePrice() {
 		double price = 0;
 
 		if (this.items != null) {
@@ -67,7 +79,7 @@ public class ShoppingCart {
 			}
 		}
 
-		return price;
+		return Math.round(price * 100.0) / 100.0;
 	}
 
 	public void validate() {

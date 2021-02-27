@@ -22,14 +22,17 @@ public class ShoppingCartEntity {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ShoppingCartItemEntity> items;
 
+	double price;
+
 	public ShoppingCartEntity() {
 		super();
 	}
 
-	public ShoppingCartEntity(Long id, List<ShoppingCartItemEntity> items) {
+	public ShoppingCartEntity(Long id, List<ShoppingCartItemEntity> items, double price) {
 		super();
 		this.id = id;
 		this.items = items;
+		this.price = price;
 	}
 
 	public Long getId() {
@@ -57,14 +60,10 @@ public class ShoppingCartEntity {
 	}
 
 	public double getPrice() {
-		double price = 0;
-
-		if (this.items != null) {
-			for (ShoppingCartItemEntity item : this.items) {
-				price += item.getTotalPrice();
-			}
-		}
-
 		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }
