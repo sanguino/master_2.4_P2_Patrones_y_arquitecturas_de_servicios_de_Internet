@@ -1,7 +1,8 @@
 package es.urjc.code.ejem1.controller;
 
+import es.urjc.code.ejem1.application.CompletedCartQueryService;
 import es.urjc.code.ejem1.controller.dto.CompletedCartResponseDTO;
-import es.urjc.code.ejem1.domain.Service.CompletedCartService;
+import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,15 @@ import java.util.Collection;
 @RequestMapping("/api/cartexpenditure")
 public class CompletedCartQueryController {
 
-	private CompletedCartService completedCartService;
+	private CompletedCartQueryService completedCartQueryService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public CompletedCartQueryController(CompletedCartService completedCartService) {
-		this.completedCartService = completedCartService;
+	public CompletedCartQueryController(CompletedCartQueryService completedCartQueryService) {
+		this.completedCartQueryService = completedCartQueryService;
 	}
 
 	@GetMapping
 	public Collection<CompletedCartResponseDTO> getShoppingCart() {
-		return Arrays.asList(mapper.map(completedCartService.getCompletedCarts(), CompletedCartResponseDTO[].class));
+		return Arrays.asList(mapper.map(completedCartQueryService.findAll(), CompletedCartResponseDTO[].class));
 	}
 }

@@ -24,13 +24,6 @@ public class Configuration {
 	}
 
 	@Bean
-	public CompletedCartService completedCartService(
-			SpringDataJPACompletedCartRepositoryAdapter completedCartRepositoryAdapter) {
-		return new CompletedCartServiceImpl(
-				completedCartRepositoryAdapter);
-	}
-
-	@Bean
 	public ProductService productService(SpringDataJPAProductRepositoryAdapter repositoryAdapter) {
 		return new ProductServiceImpl(repositoryAdapter);
 	}
