@@ -1,4 +1,4 @@
-package es.urjc.code.ejem1.domain.Service;
+package es.urjc.code.ejem1.domain.service;
 
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;

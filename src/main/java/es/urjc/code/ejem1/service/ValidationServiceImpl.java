@@ -1,7 +1,7 @@
 package es.urjc.code.ejem1.service;
 
-import es.urjc.code.ejem1.domain.Service.ValidationService;
 import es.urjc.code.ejem1.domain.model.ShoppingCartItem;
+import es.urjc.code.ejem1.domain.service.ValidationService;
 
 import java.util.List;
 import java.util.Random;

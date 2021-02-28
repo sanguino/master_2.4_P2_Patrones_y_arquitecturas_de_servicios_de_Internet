@@ -3,7 +3,6 @@ package es.urjc.code.ejem1.controller;
 import es.urjc.code.ejem1.application.ShoppingCartCommandService;
 import es.urjc.code.ejem1.controller.dto.ShoppingCartRequestDTO;
 import es.urjc.code.ejem1.controller.dto.ShoppingCartResponseDTO;
-import es.urjc.code.ejem1.domain.Service.ShoppingCartService;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import org.modelmapper.ModelMapper;
@@ -12,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.UUID;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 

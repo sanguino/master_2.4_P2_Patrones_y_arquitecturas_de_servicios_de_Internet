@@ -1,7 +1,7 @@
 package es.urjc.code.ejem1;
 
-import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
-import es.urjc.code.ejem1.domain.Service.ShoppingCartServiceImpl;
+import es.urjc.code.ejem1.domain.service.ProductServiceImpl;
+import es.urjc.code.ejem1.domain.service.ShoppingCartServiceImpl;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
@@ -42,11 +42,9 @@ public class ShoppingCartService {
 	@BeforeEach
 	void setUp() {
 		productRepository = mock(ProductRepository.class);
-		shoppingCartRepository = mock(ShoppingCartRepository.class);
 		applicationEventPublisher = mock(ApplicationEventPublisher.class);
 		productService = new ProductServiceImpl();
 		shoppingCartService = new ShoppingCartServiceImpl(
-				shoppingCartRepository,
 		        new ValidationServiceImpl(),
 		        applicationEventPublisher);
 	}

@@ -1,9 +1,9 @@
 package es.urjc.code.ejem1.application;
 
-import es.urjc.code.ejem1.domain.Service.ProductService;
 import es.urjc.code.ejem1.domain.dto.DeletedProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import es.urjc.code.ejem1.domain.service.ProductService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

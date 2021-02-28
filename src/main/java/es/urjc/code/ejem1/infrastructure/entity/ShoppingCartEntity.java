@@ -2,7 +2,10 @@ package es.urjc.code.ejem1.infrastructure.entity;
 
 import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.UUID;
 

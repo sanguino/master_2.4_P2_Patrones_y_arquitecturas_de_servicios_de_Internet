@@ -1,6 +1,8 @@
 package es.urjc.code.ejem1.infrastructure.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.util.UUID;
 
 @Entity

@@ -1,33 +1,23 @@
-package es.urjc.code.ejem1.domain.Service;
+package es.urjc.code.ejem1.domain.service;
 
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import es.urjc.code.ejem1.domain.model.*;
-import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
-	private ShoppingCartRepository shoppingCartRepository;
 	private ValidationService validationService;
 	private ApplicationEventPublisher applicationEventPublisher;
 	
 	private ModelMapper mapper = new ModelMapper();
 
-	public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
-	        ValidationService validationService,
+	public ShoppingCartServiceImpl(ValidationService validationService,
 	        ApplicationEventPublisher applicationEventPublisher) {
-		this.shoppingCartRepository = shoppingCartRepository;
 		this.validationService = validationService;
 		this.applicationEventPublisher = applicationEventPublisher;
-	}
-	
-	private FullShoppingCartDTO saveShoppingCart(FullShoppingCartDTO fullShoppingCartDTO) {
-		FullShoppingCartDTO saveFullShoppingCartDTO = shoppingCartRepository.save(fullShoppingCartDTO);
-
-		return (saveFullShoppingCartDTO != null) ? saveFullShoppingCartDTO : fullShoppingCartDTO;
 	}
 
 	@Override

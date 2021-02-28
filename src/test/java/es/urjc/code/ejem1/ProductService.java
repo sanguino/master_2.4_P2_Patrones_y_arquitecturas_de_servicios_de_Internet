@@ -14,7 +14,7 @@ import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.model.Product;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
-import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
+import es.urjc.code.ejem1.domain.service.ProductServiceImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ProductService {
