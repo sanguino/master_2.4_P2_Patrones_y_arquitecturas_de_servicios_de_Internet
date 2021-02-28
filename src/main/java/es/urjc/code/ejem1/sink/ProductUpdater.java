@@ -1,8 +1,8 @@
 package es.urjc.code.ejem1.sink;
 
+import es.urjc.code.ejem1.domain.dto.DeletedProductDTO;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
-import es.urjc.code.ejem1.event.CreateProductEvent;
-import es.urjc.code.ejem1.event.DeleteProductEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,12 @@ public class ProductUpdater {
 	}
 
 	@EventListener
-	public void saveProduct(CreateProductEvent event) {
-		repository.save(event.getFullProductDTO());
+	public void saveProduct(FullProductDTO createdProduct) {
+		repository.save(createdProduct);
 	}
 
 	@EventListener
-	public void deleteProduct(DeleteProductEvent event) {
-		repository.deleteById(event.getFullProductDTO().getId());
+	public void deleteProduct(DeletedProductDTO deletedProduct) {
+		repository.deleteById(deletedProduct.getId());
 	}
 }

@@ -1,9 +1,8 @@
 package es.urjc.code.ejem1.sink;
 
+import es.urjc.code.ejem1.domain.dto.DeletedShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
-import es.urjc.code.ejem1.event.SaveShoppingCartEvent;
-import es.urjc.code.ejem1.event.DeleteShoppingCartEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +16,13 @@ public class ShoppingCartUpdater {
 	}
 
 	@EventListener
-	public void saveShoppingCart(SaveShoppingCartEvent event) {
-		repository.save(event.getFullShoppingCartDTO());
+	public void saveShoppingCart(FullShoppingCartDTO createdCart) {
+		repository.save(createdCart);
 	}
 
 	@EventListener
-	public void deleteShoppingCart(DeleteShoppingCartEvent event) {
-		FullShoppingCartDTO fullShoppingCartDTO = event.getFullShoppingCartDTO();
-		repository.deleteById(fullShoppingCartDTO.getId());
+	public void deleteShoppingCart(DeletedShoppingCartDTO deletedCart) {
+		repository.deleteById(deletedCart.getId());
 	}
 
 }

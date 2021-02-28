@@ -1,11 +1,10 @@
 package es.urjc.code.ejem1.application;
 
 import es.urjc.code.ejem1.domain.Service.ShoppingCartService;
+import es.urjc.code.ejem1.domain.dto.DeletedShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
-import es.urjc.code.ejem1.event.SaveShoppingCartEvent;
-import es.urjc.code.ejem1.event.DeleteShoppingCartEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -30,22 +29,22 @@ public class ShoppingCartCommandService {
   }
 
   public FullShoppingCartDTO createShoppingCart() {
-    FullShoppingCartDTO fullShoppingCartDTO = shoppingCartService.createShoppingCart();
-    applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, fullShoppingCartDTO));
-    return fullShoppingCartDTO;
+    FullShoppingCartDTO createdFullShoppingCartDTO = shoppingCartService.createShoppingCart();
+    applicationEventPublisher.publishEvent(createdFullShoppingCartDTO);
+    return createdFullShoppingCartDTO;
   }
 
   public FullShoppingCartDTO updateShoppingCart(String id, ShoppingCartDTO shoppingCartDTO) {
     FullShoppingCartDTO currentFullShoppingCartDTO = shoppingCartQueryService.findById(id);
     FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.updateShoppingCart(currentFullShoppingCartDTO, shoppingCartDTO);
-    applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, updatedFullCartDTO));
+    applicationEventPublisher.publishEvent(updatedFullCartDTO);
     return updatedFullCartDTO;
 
   }
 
   public FullShoppingCartDTO deleteShoppingCart(String id) {
     FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(id);
-      applicationEventPublisher.publishEvent(new DeleteShoppingCartEvent(this, fullShoppingCartDTO));
+      applicationEventPublisher.publishEvent(new DeletedShoppingCartDTO(fullShoppingCartDTO.getId()));
       return fullShoppingCartDTO;
     }
 
@@ -54,7 +53,7 @@ public class ShoppingCartCommandService {
     FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(idShoppingCart);
 
     FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.addProduct(fullShoppingCartDTO, fullProductDTO, quantity);
-    applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, updatedFullCartDTO));
+    applicationEventPublisher.publishEvent(updatedFullCartDTO);
     return updatedFullCartDTO;
   }
 
@@ -63,7 +62,7 @@ public class ShoppingCartCommandService {
     FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(idShoppingCart);
 
     FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.deleteProduct(fullShoppingCartDTO, fullProductDTO);
-    applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, updatedFullCartDTO));
+    applicationEventPublisher.publishEvent(updatedFullCartDTO);
     return updatedFullCartDTO;
   }
 }

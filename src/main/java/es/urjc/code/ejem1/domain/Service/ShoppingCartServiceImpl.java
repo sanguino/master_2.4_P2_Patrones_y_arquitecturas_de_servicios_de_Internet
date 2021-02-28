@@ -2,16 +2,11 @@ package es.urjc.code.ejem1.domain.Service;
 
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
-import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import es.urjc.code.ejem1.domain.model.*;
-import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
-import es.urjc.code.ejem1.event.CompletedCartEvent;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
-
-import java.util.UUID;
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
@@ -50,7 +45,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 				updateShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED &&
 				currentShoppingCart.getStatus() != ShoppingCartStatus.COMPLETED) {
 			currentShoppingCart.setValidationService(validationService);
-			CompletedCartEvent event = new CompletedCartEvent(this, currentShoppingCart.validate());
+			CompletedCart event =currentShoppingCart.validate();
 			applicationEventPublisher.publishEvent(event);
 		}
 
