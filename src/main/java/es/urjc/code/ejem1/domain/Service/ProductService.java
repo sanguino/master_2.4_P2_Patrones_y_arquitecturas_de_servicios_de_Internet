@@ -7,8 +7,6 @@ import java.util.Collection;
 import java.util.UUID;
 
 public interface ProductService {
-	public Collection<FullProductDTO> getProducts();
-	public FullProductDTO getProduct(UUID id);
-	public FullProductDTO createProduct(ProductDTO productDTO);
-	public FullProductDTO deleteProduct(UUID id);
+	FullProductDTO createProduct(ProductDTO productDTO);
+	FullProductDTO deleteProduct(UUID id);
 }

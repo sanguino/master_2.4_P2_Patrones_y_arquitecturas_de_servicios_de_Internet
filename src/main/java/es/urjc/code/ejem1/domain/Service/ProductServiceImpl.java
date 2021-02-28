@@ -19,16 +19,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Collection<FullProductDTO> getProducts() {
-		return repository.finAll();
-	}
-
-	@Override
-	public FullProductDTO getProduct(UUID id) {
-		return repository.findById(id);
-	}
-
-	@Override
 	public FullProductDTO createProduct(ProductDTO productDTO) {
 		Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice());
 		FullProductDTO fullProductDTO = mapper.map(product, FullProductDTO.class);
