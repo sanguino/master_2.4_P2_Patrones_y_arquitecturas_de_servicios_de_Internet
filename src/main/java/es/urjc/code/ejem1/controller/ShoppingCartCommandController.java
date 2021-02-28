@@ -69,6 +69,6 @@ public class ShoppingCartCommandController {
 
 	@DeleteMapping("/{id}")
 	public ShoppingCartResponseDTO deleteShoppingCart(@PathVariable String id) {
-		return mapper.map(shoppingService.deleteShoppingCart(UUID.fromString(id)), ShoppingCartResponseDTO.class);
+		return mapper.map(shoppingCartCommandService.deleteShoppingCart(id), ShoppingCartResponseDTO.class);
 	}
 }

@@ -80,10 +80,10 @@ public class ShoppingCartService {
 		assertEquals(fullShoppingCartItemDTO.getTotalPrice(), items * productDTO.getPrice());
 	}
 	
-	@Test
+	/*@Test
 	@Order(3)
 	void shoppingCartCanBeDeleted() {
 		shoppingCartService.deleteShoppingCart(createdShoppingCart.getId());
 		verify(shoppingCartRepository).deleteById(createdShoppingCart.getId());
-	}
+	}*/
 }

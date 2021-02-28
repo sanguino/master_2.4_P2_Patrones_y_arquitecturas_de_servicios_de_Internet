@@ -1,9 +1,12 @@
 package es.urjc.code.ejem1.application;
 
 import es.urjc.code.ejem1.domain.Service.ShoppingCartService;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import es.urjc.code.ejem1.event.CreateShoppingCartEvent;
+import es.urjc.code.ejem1.event.DeleteProductEvent;
+import es.urjc.code.ejem1.event.DeleteShoppingCartEvent;
 import es.urjc.code.ejem1.event.UpdateShoppingCartEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -34,6 +37,12 @@ public class ShoppingCartCommandService {
     return updatedFullCartDTO;
 
   }
+
+  public FullShoppingCartDTO deleteShoppingCart(String id) {
+    FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(id);
+      applicationEventPublisher.publishEvent(new DeleteShoppingCartEvent(this, fullShoppingCartDTO));
+      return fullShoppingCartDTO;
+    }
 }
 
 

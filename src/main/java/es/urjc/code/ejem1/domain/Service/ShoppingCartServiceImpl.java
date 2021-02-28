@@ -60,14 +60,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO deleteShoppingCart(UUID id) {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(id);
-		shoppingCartRepository.deleteById(id);
-
-		return fullShoppingCartDTO;
-	}
-
-	@Override
 	public FullShoppingCartDTO addProduct(UUID idShoppingCart, UUID idProduct, int quantity) {
 		FullProductDTO fullProductDTO = productRepository.findById(idProduct);
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
