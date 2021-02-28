@@ -1,13 +1,9 @@
 package es.urjc.code.ejem1.application;
 
-import es.urjc.code.ejem1.controller.dto.CompletedCartResponseDTO;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
-import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 

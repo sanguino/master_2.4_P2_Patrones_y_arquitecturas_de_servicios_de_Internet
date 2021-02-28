@@ -2,7 +2,6 @@ package es.urjc.code.ejem1.controller;
 
 import es.urjc.code.ejem1.application.CompletedCartQueryService;
 import es.urjc.code.ejem1.controller.dto.CompletedCartResponseDTO;
-import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

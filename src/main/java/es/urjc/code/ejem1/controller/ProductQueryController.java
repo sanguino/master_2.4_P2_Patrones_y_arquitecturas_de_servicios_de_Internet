@@ -2,7 +2,6 @@ package es.urjc.code.ejem1.controller;
 
 import es.urjc.code.ejem1.application.ProductQueryService;
 import es.urjc.code.ejem1.controller.dto.ProductResponseDTO;
-import es.urjc.code.ejem1.domain.Service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/products")
