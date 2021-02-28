@@ -6,7 +6,6 @@ import es.urjc.code.ejem1.infrastructure.entity.ShoppingCartEntity;
 import es.urjc.code.ejem1.infrastructure.exception.ShoppingCartNotFoundException;
 import es.urjc.code.ejem1.infrastructure.repository.SpringDataJPAShoppingCartRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,11 +13,9 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 
 	private SpringDataJPAShoppingCartRepository repository;
 	private ModelMapper mapper = new ModelMapper();
-	private final ApplicationEventPublisher applicationEventPublisher;
 
-	public SpringDataJPAShoppingCartRepositoryAdapter(SpringDataJPAShoppingCartRepository repository, ApplicationEventPublisher applicationEventPublisher) {
+	public SpringDataJPAShoppingCartRepositoryAdapter(SpringDataJPAShoppingCartRepository repository) {
 		this.repository = repository;
-		this.applicationEventPublisher = applicationEventPublisher;
 	}
 
 	@Override
@@ -28,13 +25,9 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 	}
 
 	@Override
-	public FullShoppingCartDTO save(FullShoppingCartDTO shoppingCart, boolean isCompleted) {
+	public FullShoppingCartDTO save(FullShoppingCartDTO shoppingCart) {
 		ShoppingCartEntity shoppingCartEntity = mapper.map(shoppingCart, ShoppingCartEntity.class);
 		repository.save(shoppingCartEntity);
-
-		if (isCompleted) {
-			applicationEventPublisher.publishEvent(shoppingCart);
-		}
 
 		return findById(shoppingCartEntity.getId());
 	}

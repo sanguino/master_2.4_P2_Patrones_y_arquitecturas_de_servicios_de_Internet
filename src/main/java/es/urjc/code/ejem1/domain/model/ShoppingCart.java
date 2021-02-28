@@ -85,7 +85,7 @@ public class ShoppingCart {
 		return Math.round(price * 100.0) / 100.0;
 	}
 
-	public void validate() {
+	public CompletedCart validate() {
 		if (this.status != ShoppingCartStatus.COMPLETED) {
 			
 			if (!validationService.validate(this.items)) {
@@ -93,7 +93,9 @@ public class ShoppingCart {
 			}
 
 			this.status = ShoppingCartStatus.COMPLETED;
+			return new CompletedCart(this.id, this.price);
 		}
+		return null;
 	}
 
 }

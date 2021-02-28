@@ -3,28 +3,29 @@ package es.urjc.code.ejem1.domain.Service;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
-import es.urjc.code.ejem1.domain.model.Product;
-import es.urjc.code.ejem1.domain.model.ShoppingCart;
-import es.urjc.code.ejem1.domain.model.ShoppingCartItem;
-import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
+import es.urjc.code.ejem1.domain.model.*;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	private ShoppingCartRepository shoppingCartRepository;
 	private ProductRepository productRepository;
 	private ValidationService validationService;
+	private ApplicationEventPublisher applicationEventPublisher;
 	
 	private ModelMapper mapper = new ModelMapper();
 
 	public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
 	        ProductRepository productRepository,
-	        ValidationService validationService) {
+	        ValidationService validationService,
+	        ApplicationEventPublisher applicationEventPublisher) {
 		this.shoppingCartRepository = shoppingCartRepository;
 		this.productRepository = productRepository;
 		this.validationService = validationService;
+		this.applicationEventPublisher = applicationEventPublisher;
 	}
 	
 	private FullShoppingCartDTO saveShoppingCart(FullShoppingCartDTO fullShoppingCartDTO) {
@@ -56,7 +57,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		if (updateShoppingCart.getStatus() != null &&
 		        updateShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED) {
 			shoppingCart.setValidationService(validationService);
-			shoppingCart.validate();
+			CompletedCart event = shoppingCart.validate();
+			applicationEventPublisher.publishEvent(event);
 		}
 
 		FullShoppingCartDTO newShoppingCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);

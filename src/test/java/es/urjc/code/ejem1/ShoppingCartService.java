@@ -24,6 +24,7 @@ import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
 import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
 import es.urjc.code.ejem1.domain.Service.ShoppingCartServiceImpl;
 import es.urjc.code.ejem1.service.ValidationServiceImpl;
+import org.springframework.context.ApplicationEventPublisher;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ShoppingCartService {
@@ -33,6 +34,8 @@ public class ShoppingCartService {
 
 	private ShoppingCartRepository shoppingCartRepository;
 	private ShoppingCartServiceImpl shoppingCartService;
+
+	private ApplicationEventPublisher applicationEventPublisher;
 
 	private ModelMapper mapper = new ModelMapper();
 	
@@ -47,15 +50,15 @@ public class ShoppingCartService {
 		shoppingCartService = new ShoppingCartServiceImpl(
 				shoppingCartRepository,
 		        productRepository,
-		        new ValidationServiceImpl());
+		        new ValidationServiceImpl(),
+		        applicationEventPublisher);
 	}
 	
 	@Test
 	@Order(1)
 	void shoppingCartCanBeAdded() {
 		createdShoppingCart = shoppingCartService.createShoppingCart();
-		boolean isCompleted = createdShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED;
-		verify(shoppingCartRepository).save(createdShoppingCart, isCompleted);
+		verify(shoppingCartRepository).save(createdShoppingCart);
 	}
 	
 	@Test

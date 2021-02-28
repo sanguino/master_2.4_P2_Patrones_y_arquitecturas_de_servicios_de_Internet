@@ -1,7 +1,6 @@
 package es.urjc.code.ejem1.sink;
 
 import es.urjc.code.ejem1.domain.dto.CompletedCartDTO;
-import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.model.CompletedCart;
 import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
 import org.modelmapper.ModelMapper;
@@ -20,8 +19,7 @@ public class CompletedCartUpdater {
 	}
 
 	@EventListener
-	public void saveCompletedCart(FullShoppingCartDTO shoppingCartDTO) {
-		CompletedCart completedCart = new CompletedCart(shoppingCartDTO.getId(), shoppingCartDTO.getPrice());
+	public void saveCompletedCart(CompletedCart completedCart) {
 		completedCartRepository.save(mapper.map(completedCart, CompletedCartDTO.class));
 	}
 }
