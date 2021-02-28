@@ -73,7 +73,7 @@ public class ShoppingCartService {
 		
 		int items = Math.abs(new Random().nextInt());
 				
-		createdShoppingCart = shoppingCartService.addProduct(fullProductDTO, createdShoppingCart, items);
+		createdShoppingCart = shoppingCartService.addProduct(createdShoppingCart, fullProductDTO, items);
 		FullShoppingCartItemDTO fullShoppingCartItemDTO = createdShoppingCart.getItems().get(0);
 
 		assertEquals(fullShoppingCartItemDTO.getQuantity(), items);

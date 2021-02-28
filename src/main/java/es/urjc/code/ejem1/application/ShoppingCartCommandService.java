@@ -53,7 +53,16 @@ public class ShoppingCartCommandService {
     FullProductDTO fullProductDTO = productQueryService.findById(idProduct);
     FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(idShoppingCart);
 
-    FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.addProduct(fullProductDTO, fullShoppingCartDTO, quantity);
+    FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.addProduct(fullShoppingCartDTO, fullProductDTO, quantity);
+    applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, updatedFullCartDTO));
+    return updatedFullCartDTO;
+  }
+
+  public FullShoppingCartDTO deleteProduct(String idShoppingCart, String idProduct) {
+    FullProductDTO fullProductDTO = productQueryService.findById(idProduct);
+    FullShoppingCartDTO fullShoppingCartDTO = shoppingCartQueryService.findById(idShoppingCart);
+
+    FullShoppingCartDTO updatedFullCartDTO = shoppingCartService.deleteProduct(fullShoppingCartDTO, fullProductDTO);
     applicationEventPublisher.publishEvent(new SaveShoppingCartEvent(this, updatedFullCartDTO));
     return updatedFullCartDTO;
   }

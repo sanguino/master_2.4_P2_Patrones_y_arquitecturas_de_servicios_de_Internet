@@ -20,12 +20,10 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping("/api/shoppingcarts")
 public class ShoppingCartCommandController {
 
-	private ShoppingCartService shoppingService;
 	private ShoppingCartCommandService shoppingCartCommandService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ShoppingCartCommandController(ShoppingCartService shoppingService, ShoppingCartCommandService shoppingCartCommandService) {
-		this.shoppingService = shoppingService;
+	public ShoppingCartCommandController(ShoppingCartCommandService shoppingCartCommandService) {
 		this.shoppingCartCommandService = shoppingCartCommandService;
 	}
 
@@ -43,7 +41,7 @@ public class ShoppingCartCommandController {
 	public ShoppingCartResponseDTO deleteProductInShoppingCart(
 	        @PathVariable String idShoppingCart,
 	        @PathVariable String idProduct) {
-		return mapper.map(shoppingService.deleteProduct(UUID.fromString(idShoppingCart), UUID.fromString(idProduct)), ShoppingCartResponseDTO.class);
+		return mapper.map(shoppingCartCommandService.deleteProduct(idShoppingCart, idProduct), ShoppingCartResponseDTO.class);
 	}
 
 	@PostMapping

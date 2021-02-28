@@ -61,7 +61,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO addProduct(FullProductDTO fullProductDTO, FullShoppingCartDTO fullShoppingCartDTO, int quantity) {
+	public FullShoppingCartDTO addProduct(FullShoppingCartDTO fullShoppingCartDTO, FullProductDTO fullProductDTO, int quantity) {
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
 		shoppingCart.removeItem(fullProductDTO.getId());
 
@@ -74,14 +74,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO deleteProduct(UUID idShoppingCart, UUID idProduct) {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
-
+	public FullShoppingCartDTO deleteProduct(FullShoppingCartDTO fullShoppingCartDTO, FullProductDTO fullProductDTO) {
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
-		shoppingCart.removeItem(idProduct);
-
-		FullShoppingCartDTO newFullProductDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
-
-		return saveShoppingCart(newFullProductDTO);
+		shoppingCart.removeItem(fullProductDTO.getId());
+		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
 	}
 }
