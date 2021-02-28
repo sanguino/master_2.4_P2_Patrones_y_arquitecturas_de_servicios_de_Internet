@@ -1,5 +1,6 @@
 package es.urjc.code.ejem1.domain.service;
 
+import es.urjc.code.ejem1.domain.dto.DeletedShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
@@ -23,7 +24,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public FullShoppingCartDTO createShoppingCart() {
 		ShoppingCart shoppingCart = new ShoppingCart();
-		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		FullShoppingCartDTO createdFullShoppingCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		applicationEventPublisher.publishEvent(createdFullShoppingCartDTO);
+		return createdFullShoppingCartDTO;
 	}
 
 	@Override
@@ -39,7 +42,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 			applicationEventPublisher.publishEvent(event);
 		}
 
-		return mapper.map(currentShoppingCart, FullShoppingCartDTO.class);
+		FullShoppingCartDTO updatedFullCartDTO = mapper.map(currentShoppingCart, FullShoppingCartDTO.class);
+		applicationEventPublisher.publishEvent(updatedFullCartDTO);
+		return updatedFullCartDTO;
+	}
+
+	@Override
+	public FullShoppingCartDTO deleteShoppingCart(FullShoppingCartDTO fullShoppingCartDTO) {
+		applicationEventPublisher.publishEvent(new DeletedShoppingCartDTO(fullShoppingCartDTO.getId()));
+		return fullShoppingCartDTO;
 	}
 
 	@Override
@@ -52,13 +63,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		        quantity);
 		shoppingCart.addItem(shoppingCartItem);
 
-		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		FullShoppingCartDTO updatedFullCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		applicationEventPublisher.publishEvent(updatedFullCartDTO);
+
+		return updatedFullCartDTO;
 	}
 
 	@Override
 	public FullShoppingCartDTO deleteProduct(FullShoppingCartDTO fullShoppingCartDTO, FullProductDTO fullProductDTO) {
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
 		shoppingCart.removeItem(fullProductDTO.getId());
-		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		FullShoppingCartDTO updatedFullCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
+		applicationEventPublisher.publishEvent(updatedFullCartDTO);
+		return updatedFullCartDTO;
 	}
 }

@@ -10,6 +10,8 @@ public interface ShoppingCartService {
 
 	FullShoppingCartDTO updateShoppingCart(FullShoppingCartDTO fullShoppingCartDTO, ShoppingCartDTO shoppingCartDTO);
 
+	FullShoppingCartDTO deleteShoppingCart(FullShoppingCartDTO fullShoppingCartDTO);
+
 	FullShoppingCartDTO addProduct(FullShoppingCartDTO fullShoppingCartDTO, FullProductDTO fullProductDTO, int quantity);
 
 	FullShoppingCartDTO deleteProduct(FullShoppingCartDTO fullShoppingCartDTO, FullProductDTO fullProductDTO);
