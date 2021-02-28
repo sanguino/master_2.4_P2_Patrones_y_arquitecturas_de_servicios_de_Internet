@@ -1,5 +1,6 @@
 package es.urjc.code.ejem1.controller;
 
+import es.urjc.code.ejem1.application.ShoppingCartCommandService;
 import es.urjc.code.ejem1.controller.dto.ShoppingCartRequestDTO;
 import es.urjc.code.ejem1.controller.dto.ShoppingCartResponseDTO;
 import es.urjc.code.ejem1.domain.Service.ShoppingCartService;
@@ -20,10 +21,12 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class ShoppingCartCommandController {
 
 	private ShoppingCartService shoppingService;
+	private ShoppingCartCommandService shoppingCartCommandService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ShoppingCartCommandController(ShoppingCartService shoppingService) {
+	public ShoppingCartCommandController(ShoppingCartService shoppingService, ShoppingCartCommandService shoppingCartCommandService) {
 		this.shoppingService = shoppingService;
+		this.shoppingCartCommandService = shoppingCartCommandService;
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
@@ -45,7 +48,7 @@ public class ShoppingCartCommandController {
 
 	@PostMapping
 	public ResponseEntity<ShoppingCartResponseDTO> createShoppingCart() {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingService.createShoppingCart();
+		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartCommandService.createShoppingCart();
 
 		URI location = fromCurrentRequest().path("/{id}")
 		        .buildAndExpand(fullShoppingCartDTO.getId()).toUri();

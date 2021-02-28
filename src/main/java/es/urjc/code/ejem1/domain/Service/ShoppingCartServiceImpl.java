@@ -39,9 +39,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	public FullShoppingCartDTO createShoppingCart() {
 		ShoppingCart shoppingCart = new ShoppingCart();
-		FullShoppingCartDTO fullShoppingCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
-		
-		return saveShoppingCart(fullShoppingCartDTO);
+		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
 	}
 
 	@Override
