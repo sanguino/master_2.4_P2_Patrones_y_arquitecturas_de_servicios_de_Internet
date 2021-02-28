@@ -1,5 +1,6 @@
 package es.urjc.code.ejem1.controller;
 
+import es.urjc.code.ejem1.application.ProductQueryService;
 import es.urjc.code.ejem1.controller.dto.ProductResponseDTO;
 import es.urjc.code.ejem1.domain.Service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -16,21 +17,21 @@ import java.util.UUID;
 @RequestMapping("/api/products")
 public class ProductQueryController {
 
-	private ProductService productService;
+	private ProductQueryService productQueryService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ProductQueryController(ProductService productService) {
-		this.productService = productService;
+	public ProductQueryController(ProductQueryService productQueryService) {
+		this.productQueryService = productQueryService;
 	}
 
 	@GetMapping
 	public Collection<ProductResponseDTO> getProducts() {
-		return Arrays.asList(mapper.map(productService.getProducts(), ProductResponseDTO[].class));
+		return Arrays.asList(mapper.map(productQueryService.findAll(), ProductResponseDTO[].class));
 	}
 
 	@GetMapping("/{id}")
 	public ProductResponseDTO getProduct(@PathVariable String id) {
-		return mapper.map(productService.getProduct(UUID.fromString(id)), ProductResponseDTO.class);
+		return mapper.map(productQueryService.findById(id), ProductResponseDTO.class);
 	}
 
 }
