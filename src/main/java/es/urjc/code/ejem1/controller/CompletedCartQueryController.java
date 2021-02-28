@@ -12,12 +12,12 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/cartexpenditure")
-public class CompletedCartController {
+public class CompletedCartQueryController {
 
 	private CompletedCartService completedCartService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public CompletedCartController(CompletedCartService completedCartService) {
+	public CompletedCartQueryController(CompletedCartService completedCartService) {
 		this.completedCartService = completedCartService;
 	}
 

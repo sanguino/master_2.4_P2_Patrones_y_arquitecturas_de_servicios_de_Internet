@@ -10,31 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.UUID;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api/products")
-public class ProductController {
+public class ProductCommandController {
 
 	private ProductService productService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ProductController(ProductService productService) {
+	public ProductCommandController(ProductService productService) {
 		this.productService = productService;
-	}
-
-	@GetMapping
-	public Collection<ProductResponseDTO> getProducts() {
-		return Arrays.asList(mapper.map(productService.getProducts(), ProductResponseDTO[].class));
-	}
-
-	@GetMapping("/{id}")
-	public ProductResponseDTO getProduct(@PathVariable String id) {
-		return mapper.map(productService.getProduct(UUID.fromString(id)), ProductResponseDTO.class);
 	}
 
 	@PostMapping

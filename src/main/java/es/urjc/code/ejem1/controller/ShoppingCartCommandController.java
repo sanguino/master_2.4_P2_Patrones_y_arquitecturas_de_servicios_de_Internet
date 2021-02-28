@@ -17,18 +17,13 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 @RestController
 @RequestMapping("/api/shoppingcarts")
-public class ShoppingCartController {
+public class ShoppingCartCommandController {
 
 	private ShoppingCartService shoppingService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ShoppingCartController(ShoppingCartService shoppingService) {
+	public ShoppingCartCommandController(ShoppingCartService shoppingService) {
 		this.shoppingService = shoppingService;
-	}
-
-	@GetMapping("/{id}")
-	public ShoppingCartResponseDTO getShoppingCart(@PathVariable String id) {
-		return mapper.map(shoppingService.getShoppingCart(UUID.fromString(id)), ShoppingCartResponseDTO.class);
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
