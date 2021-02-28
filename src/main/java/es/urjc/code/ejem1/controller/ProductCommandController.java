@@ -1,8 +1,8 @@
 package es.urjc.code.ejem1.controller;
 
+import es.urjc.code.ejem1.application.ProductCommandService;
 import es.urjc.code.ejem1.controller.dto.ProductRequestDTO;
 import es.urjc.code.ejem1.controller.dto.ProductResponseDTO;
-import es.urjc.code.ejem1.domain.Service.ProductService;
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;
 import org.modelmapper.ModelMapper;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.UUID;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -18,17 +17,17 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping("/api/products")
 public class ProductCommandController {
 
-	private ProductService productService;
+	private ProductCommandService productCommandService;
 	private ModelMapper mapper = new ModelMapper();
 
-	public ProductCommandController(ProductService productService) {
-		this.productService = productService;
+	public ProductCommandController(ProductCommandService productCommandService) {
+		this.productCommandService = productCommandService;
 	}
 
 	@PostMapping
 	public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
 		ProductDTO productDTO = mapper.map(productRequestDTO, ProductDTO.class);
-		FullProductDTO fullProductDTO = productService.createProduct(productDTO);
+		FullProductDTO fullProductDTO = productCommandService.createProduct(productDTO);
 
 		URI location = fromCurrentRequest().path("/{id}")
 		        .buildAndExpand(fullProductDTO.getId()).toUri();
@@ -39,7 +38,7 @@ public class ProductCommandController {
 
 	@DeleteMapping("/{id}")
 	public ProductResponseDTO deleteProduct(@PathVariable String id) {
-		return mapper.map(productService.deleteProduct(UUID.fromString(id)), ProductResponseDTO.class);
+		return mapper.map(productCommandService.deleteProduct(id), ProductResponseDTO.class);
 	}
 
 }

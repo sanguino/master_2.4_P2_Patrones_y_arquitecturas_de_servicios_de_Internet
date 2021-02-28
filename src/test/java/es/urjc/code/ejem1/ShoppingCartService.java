@@ -1,30 +1,28 @@
 package es.urjc.code.ejem1;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import java.util.Random;
-
-import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
+import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
+import es.urjc.code.ejem1.domain.Service.ShoppingCartServiceImpl;
+import es.urjc.code.ejem1.domain.dto.FullProductDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
+import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import es.urjc.code.ejem1.domain.model.Product;
+import es.urjc.code.ejem1.domain.repository.ProductRepository;
+import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
+import es.urjc.code.ejem1.service.ValidationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.modelmapper.ModelMapper;
-
-import es.urjc.code.ejem1.domain.dto.FullProductDTO;
-import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
-import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
-import es.urjc.code.ejem1.domain.model.Product;
-import es.urjc.code.ejem1.domain.dto.ProductDTO;
-import es.urjc.code.ejem1.domain.repository.ProductRepository;
-import es.urjc.code.ejem1.domain.Service.ProductServiceImpl;
-import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
-import es.urjc.code.ejem1.domain.Service.ShoppingCartServiceImpl;
-import es.urjc.code.ejem1.service.ValidationServiceImpl;
 import org.springframework.context.ApplicationEventPublisher;
+
+import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ShoppingCartService {
@@ -46,7 +44,7 @@ public class ShoppingCartService {
 		productRepository = mock(ProductRepository.class);
 		shoppingCartRepository = mock(ShoppingCartRepository.class);
 		
-		productService = new ProductServiceImpl(productRepository);
+		productService = new ProductServiceImpl();
 		shoppingCartService = new ShoppingCartServiceImpl(
 				shoppingCartRepository,
 		        productRepository,
