@@ -35,7 +35,7 @@ public class ShoppingCartCommandController {
 	        @PathVariable String idProduct,
 	        @PathVariable int quantity) {
 
-		return mapper.map(shoppingService.addProduct(UUID.fromString(idShoppingCart), UUID.fromString(idProduct), quantity),
+		return mapper.map(shoppingCartCommandService.addProduct(idShoppingCart, idProduct, quantity),
 		        ShoppingCartResponseDTO.class);
 	}
 

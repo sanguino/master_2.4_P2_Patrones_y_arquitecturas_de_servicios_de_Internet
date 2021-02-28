@@ -12,8 +12,6 @@ public interface ShoppingCartService {
 
 	FullShoppingCartDTO updateShoppingCart(FullShoppingCartDTO fullShoppingCartDTO, ShoppingCartDTO shoppingCartDTO);
 
-	FullShoppingCartDTO addProduct(UUID idShoppingCart, UUID idProduct, int nProducts);
-
 	FullShoppingCartDTO addProduct(FullProductDTO fullProductDTO, FullShoppingCartDTO fullShoppingCartDTO, int quantity);
 
 	FullShoppingCartDTO deleteProduct(UUID idShoppingCart, UUID idProduct);

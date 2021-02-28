@@ -2,6 +2,7 @@ package es.urjc.code.ejem1.domain.Service;
 
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.FullShoppingCartDTO;
+import es.urjc.code.ejem1.domain.dto.FullShoppingCartItemDTO;
 import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import es.urjc.code.ejem1.domain.model.*;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
@@ -60,15 +61,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO addProduct(UUID idShoppingCart, UUID idProduct, int quantity) {
-		FullProductDTO fullProductDTO = productRepository.findById(idProduct);
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
-
-		return addProduct(fullProductDTO, fullShoppingCartDTO, quantity);
-	}
-
-	public FullShoppingCartDTO addProduct(FullProductDTO fullProductDTO, FullShoppingCartDTO fullShoppingCartDTO,
-	        int quantity) {
+	public FullShoppingCartDTO addProduct(FullProductDTO fullProductDTO, FullShoppingCartDTO fullShoppingCartDTO, int quantity) {
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
 		shoppingCart.removeItem(fullProductDTO.getId());
 
@@ -77,9 +70,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		        quantity);
 		shoppingCart.addItem(shoppingCartItem);
 
-		FullShoppingCartDTO newFullProductDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
-
-		return saveShoppingCart(newFullProductDTO);
+		return mapper.map(shoppingCart, FullShoppingCartDTO.class);
 	}
 
 	@Override

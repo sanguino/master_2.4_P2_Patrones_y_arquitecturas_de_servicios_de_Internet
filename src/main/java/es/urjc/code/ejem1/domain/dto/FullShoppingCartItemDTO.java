@@ -7,6 +7,7 @@ import java.util.UUID;
 public class FullShoppingCartItemDTO {
 	
 	private UUID id;
+	private UUID cartId;
 	private Product product;
 	private int quantity;
 	private double totalPrice;
@@ -21,6 +22,14 @@ public class FullShoppingCartItemDTO {
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public UUID getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(UUID cartId) {
+		this.cartId = cartId;
 	}
 
 	public Product getProduct() {
