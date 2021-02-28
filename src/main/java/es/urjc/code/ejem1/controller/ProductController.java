@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -32,8 +33,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public ProductResponseDTO getProduct(@PathVariable Long id) {
-		return mapper.map(productService.getProduct(id), ProductResponseDTO.class);
+	public ProductResponseDTO getProduct(@PathVariable String id) {
+		return mapper.map(productService.getProduct(UUID.fromString(id)), ProductResponseDTO.class);
 	}
 
 	@PostMapping
@@ -49,8 +50,8 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ProductResponseDTO deleteProduct(@PathVariable Long id) {
-		return mapper.map(productService.deleteProduct(id), ProductResponseDTO.class);
+	public ProductResponseDTO deleteProduct(@PathVariable String id) {
+		return mapper.map(productService.deleteProduct(UUID.fromString(id)), ProductResponseDTO.class);
 	}
 
 }

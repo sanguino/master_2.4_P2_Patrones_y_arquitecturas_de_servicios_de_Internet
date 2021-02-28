@@ -9,6 +9,8 @@ import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 
+import java.util.UUID;
+
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	private ShoppingCartRepository shoppingCartRepository;
@@ -35,7 +37,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO getShoppingCart(Long id) {
+	public FullShoppingCartDTO getShoppingCart(UUID id) {
 		return mapper.map(shoppingCartRepository.findById(id), FullShoppingCartDTO.class);
 	}
 
@@ -48,7 +50,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO updateShoppingCart(Long id, ShoppingCartDTO shoppingCartDTO) {
+	public FullShoppingCartDTO updateShoppingCart(UUID id, ShoppingCartDTO shoppingCartDTO) {
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(id);
 
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
@@ -67,7 +69,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO deleteShoppingCart(Long id) {
+	public FullShoppingCartDTO deleteShoppingCart(UUID id) {
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(id);
 		shoppingCartRepository.deleteById(id);
 
@@ -75,7 +77,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO addProduct(Long idShoppingCart, Long idProduct, int quantity) {
+	public FullShoppingCartDTO addProduct(UUID idShoppingCart, UUID idProduct, int quantity) {
 		FullProductDTO fullProductDTO = productRepository.findById(idProduct);
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
 
@@ -98,7 +100,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO deleteProduct(Long idShoppingCart, Long idProduct) {
+	public FullShoppingCartDTO deleteProduct(UUID idShoppingCart, UUID idProduct) {
 		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(idShoppingCart);
 
 		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);

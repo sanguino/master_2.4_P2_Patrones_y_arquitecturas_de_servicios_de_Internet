@@ -1,19 +1,21 @@
 package es.urjc.code.ejem1.domain.dto;
 
+import java.util.UUID;
+
 public class FullCompletedCartDTO {
 
-	private Long cartId;
+	private UUID cartId;
 	private double expenditure;
 
 	public FullCompletedCartDTO() {
 		super();
 	}
 
-	public Long getCartId() {
+	public UUID getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(Long cartId) {
+	public void setCartId(UUID cartId) {
 		this.cartId = cartId;
 	}
 

@@ -2,9 +2,11 @@ package es.urjc.code.ejem1.controller.dto;
 
 import es.urjc.code.ejem1.domain.model.Product;
 
+import java.util.UUID;
+
 public class ShoppingCartItemResponseDTO {
 
-	private Long id;
+	private String id;
 	private Product product;
 	private int quantity;
 	private double totalPrice;
@@ -13,12 +15,12 @@ public class ShoppingCartItemResponseDTO {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(UUID id) {
+		this.id = id.toString();
 	}
 
 	public Product getProduct() {

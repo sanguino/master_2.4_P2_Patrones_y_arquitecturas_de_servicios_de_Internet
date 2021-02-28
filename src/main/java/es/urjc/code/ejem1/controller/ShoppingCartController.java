@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.UUID;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -26,25 +27,25 @@ public class ShoppingCartController {
 	}
 
 	@GetMapping("/{id}")
-	public ShoppingCartResponseDTO getShoppingCart(@PathVariable Long id) {
-		return mapper.map(shoppingService.getShoppingCart(id), ShoppingCartResponseDTO.class);
+	public ShoppingCartResponseDTO getShoppingCart(@PathVariable String id) {
+		return mapper.map(shoppingService.getShoppingCart(UUID.fromString(id)), ShoppingCartResponseDTO.class);
 	}
 
 	@PostMapping("/{idShoppingCart}/product/{idProduct}/quantity/{quantity}")
 	public ShoppingCartResponseDTO addProductInShoppingCart(
-	        @PathVariable Long idShoppingCart,
-	        @PathVariable Long idProduct,
+	        @PathVariable String idShoppingCart,
+	        @PathVariable String idProduct,
 	        @PathVariable int quantity) {
 
-		return mapper.map(shoppingService.addProduct(idShoppingCart, idProduct, quantity),
+		return mapper.map(shoppingService.addProduct(UUID.fromString(idShoppingCart), UUID.fromString(idProduct), quantity),
 		        ShoppingCartResponseDTO.class);
 	}
 
 	@DeleteMapping("/{idShoppingCart}/product/{idProduct}")
 	public ShoppingCartResponseDTO deleteProductInShoppingCart(
-	        @PathVariable Long idShoppingCart,
-	        @PathVariable Long idProduct) {
-		return mapper.map(shoppingService.deleteProduct(idShoppingCart, idProduct), ShoppingCartResponseDTO.class);
+	        @PathVariable String idShoppingCart,
+	        @PathVariable String idProduct) {
+		return mapper.map(shoppingService.deleteProduct(UUID.fromString(idShoppingCart), UUID.fromString(idProduct)), ShoppingCartResponseDTO.class);
 	}
 
 	@PostMapping
@@ -60,16 +61,16 @@ public class ShoppingCartController {
 
 	@PatchMapping("/{id}")
 	public ShoppingCartResponseDTO updateShoppingCart(
-	        @PathVariable Long id,
+	        @PathVariable String id,
 	        @Validated @RequestBody ShoppingCartRequestDTO shoppingCartRequestDTO) {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingService.updateShoppingCart(id,
+		FullShoppingCartDTO fullShoppingCartDTO = shoppingService.updateShoppingCart(UUID.fromString(id),
 		        mapper.map(shoppingCartRequestDTO, ShoppingCartDTO.class));
 
 		return mapper.map(fullShoppingCartDTO, ShoppingCartResponseDTO.class);
 	}
 
 	@DeleteMapping("/{id}")
-	public ShoppingCartResponseDTO deleteShoppingCart(@PathVariable Long id) {
-		return mapper.map(shoppingService.deleteShoppingCart(id), ShoppingCartResponseDTO.class);
+	public ShoppingCartResponseDTO deleteShoppingCart(@PathVariable String id) {
+		return mapper.map(shoppingService.deleteShoppingCart(UUID.fromString(id)), ShoppingCartResponseDTO.class);
 	}
 }

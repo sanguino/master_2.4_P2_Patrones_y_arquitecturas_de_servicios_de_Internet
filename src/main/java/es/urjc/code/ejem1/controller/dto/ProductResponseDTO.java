@@ -1,8 +1,10 @@
 package es.urjc.code.ejem1.controller.dto;
 
+import java.util.UUID;
+
 public class ProductResponseDTO {
 
-	private Long id;
+	private String id;
 	private String name;
 	private String description;
 	private double price;
@@ -11,12 +13,12 @@ public class ProductResponseDTO {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(UUID id) {
+		this.id = id.toString();
 	}
 
 	public String getName() {

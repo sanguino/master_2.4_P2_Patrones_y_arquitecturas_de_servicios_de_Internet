@@ -3,10 +3,11 @@ package es.urjc.code.ejem1.controller.dto;
 import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ShoppingCartResponseDTO {
 
-	private Long id;
+	private String id;
 	private ShoppingCartStatus status;
 	private List<ShoppingCartItemResponseDTO> items;
 	private double price;
@@ -15,12 +16,12 @@ public class ShoppingCartResponseDTO {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(UUID id) {
+		this.id = id.toString();
 	}
 
 	public ShoppingCartStatus getStatus() {

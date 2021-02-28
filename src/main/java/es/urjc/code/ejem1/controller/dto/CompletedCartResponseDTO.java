@@ -1,20 +1,22 @@
 package es.urjc.code.ejem1.controller.dto;
 
+import java.util.UUID;
+
 public class CompletedCartResponseDTO {
 
-  private Long cartId;
+  private String cartId;
   private double expenditure;
 
   public CompletedCartResponseDTO() {
     super();
   }
 
-  public Long getCartId() {
+  public String getCartId() {
     return cartId;
   }
 
-  public void setCartId(Long cartId) {
-    this.cartId = cartId;
+  public void setCartId(UUID cartId) {
+    this.cartId = cartId.toString();
   }
 
   public double getExpenditure() {

@@ -8,6 +8,8 @@ import es.urjc.code.ejem1.infrastructure.repository.SpringDataJPAShoppingCartRep
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartRepository {
 
@@ -19,7 +21,7 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 	}
 
 	@Override
-	public FullShoppingCartDTO findById(Long id) {
+	public FullShoppingCartDTO findById(UUID id) {
 		return mapper.map(repository.findById(id).orElseThrow(ShoppingCartNotFoundException::new),
 		        FullShoppingCartDTO.class);
 	}
@@ -33,7 +35,7 @@ public class SpringDataJPAShoppingCartRepositoryAdapter implements ShoppingCartR
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(UUID id) {
 		repository.deleteById(id);
 	}
 

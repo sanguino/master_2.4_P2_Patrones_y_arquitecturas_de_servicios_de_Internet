@@ -1,13 +1,13 @@
 package es.urjc.code.ejem1.infrastructure.entity;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class ShoppingCartItemEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 
 	@OneToOne
 	private ProductEntity product;
@@ -18,18 +18,18 @@ public class ShoppingCartItemEntity {
 		super();
 	}
 
-	public ShoppingCartItemEntity(Long id, ProductEntity product, int quantity) {
+	public ShoppingCartItemEntity(UUID id, ProductEntity product, int quantity) {
 		super();
 		this.id = id;
 		this.product = product;
 		this.quantity = quantity;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

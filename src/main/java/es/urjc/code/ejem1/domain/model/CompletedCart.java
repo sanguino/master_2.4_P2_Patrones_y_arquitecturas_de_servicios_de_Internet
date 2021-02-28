@@ -1,24 +1,26 @@
 package es.urjc.code.ejem1.domain.model;
 
+import java.util.UUID;
+
 public class CompletedCart {
 
-	private Long cartId;
+	private UUID cartId;
 	private double expenditure;
 
 	public CompletedCart() {
 		super();
 	}
 
-	public CompletedCart(Long cartId, double expenditure) {
+	public CompletedCart(UUID cartId, double expenditure) {
 		this.cartId = cartId;
 		this.expenditure = expenditure;
 	}
 
-	public Long getCartId() {
+	public UUID getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(Long cartId) {
+	public void setCartId(UUID cartId) {
 		this.cartId = cartId;
 	}
 

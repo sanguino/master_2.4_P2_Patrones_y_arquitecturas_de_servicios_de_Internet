@@ -5,10 +5,11 @@ import es.urjc.code.ejem1.domain.exception.ShoppingCartDontStockException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ShoppingCart {
 
-	private Long id;
+	private UUID id;
 	private ShoppingCartStatus status;
 	private List<ShoppingCartItem> items;
 	private double price;
@@ -17,17 +18,17 @@ public class ShoppingCart {
 
 	public ShoppingCart() {
 		super();
-
+		this.id = UUID.randomUUID();
 		this.status = ShoppingCartStatus.PENDING;
 		this.items = new ArrayList<>();
 		this.price = 0;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -68,7 +69,7 @@ public class ShoppingCart {
 		this.price = this.calculatePrice();
 	}
 
-	public void removeItem(Long idProduct) {
+	public void removeItem(UUID idProduct) {
 		this.items.removeIf(item -> item.getProduct().getId().equals(idProduct));
 		this.price = this.calculatePrice();
 	}
@@ -87,7 +88,7 @@ public class ShoppingCart {
 
 	public CompletedCart validate() {
 		if (this.status != ShoppingCartStatus.COMPLETED) {
-			
+
 			if (!validationService.validate(this.items)) {
 				throw new ShoppingCartDontStockException("Not enough stock");
 			}

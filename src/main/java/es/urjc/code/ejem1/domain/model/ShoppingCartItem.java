@@ -1,8 +1,10 @@
 package es.urjc.code.ejem1.domain.model;
 
+import java.util.UUID;
+
 public class ShoppingCartItem {
 
-	private Long id;
+	private UUID id;
 	private Product product;
 	private int quantity;
 
@@ -12,15 +14,16 @@ public class ShoppingCartItem {
 
 	public ShoppingCartItem(Product product, int quantity) {
 		super();
+		this.id = UUID.randomUUID();
 		this.product = product;
 		this.quantity = quantity;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

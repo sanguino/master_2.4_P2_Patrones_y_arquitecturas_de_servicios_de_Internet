@@ -4,13 +4,13 @@ import es.urjc.code.ejem1.domain.model.ShoppingCartStatus;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class ShoppingCartEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 	private ShoppingCartStatus status;
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -22,18 +22,18 @@ public class ShoppingCartEntity {
 		super();
 	}
 
-	public ShoppingCartEntity(Long id, List<ShoppingCartItemEntity> items, double price) {
+	public ShoppingCartEntity(UUID id, List<ShoppingCartItemEntity> items, double price) {
 		super();
 		this.id = id;
 		this.items = items;
 		this.price = price;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

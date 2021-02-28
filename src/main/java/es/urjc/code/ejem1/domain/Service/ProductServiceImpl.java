@@ -2,10 +2,12 @@ package es.urjc.code.ejem1.domain.Service;
 
 import es.urjc.code.ejem1.domain.dto.FullProductDTO;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;
+import es.urjc.code.ejem1.domain.model.Product;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public class ProductServiceImpl implements ProductService {
 
@@ -22,20 +24,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public FullProductDTO getProduct(Long id) {
+	public FullProductDTO getProduct(UUID id) {
 		return repository.findById(id);
 	}
 
 	@Override
 	public FullProductDTO createProduct(ProductDTO productDTO) {
-		FullProductDTO fullProductDTO = mapper.map(productDTO, FullProductDTO.class);
+		Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice());
+		FullProductDTO fullProductDTO = mapper.map(product, FullProductDTO.class);
 		FullProductDTO saveFullProductDTO = repository.save(fullProductDTO);
 
 		return (saveFullProductDTO != null) ? saveFullProductDTO : fullProductDTO;
 	}
 
 	@Override
-	public FullProductDTO deleteProduct(Long id) {
+	public FullProductDTO deleteProduct(UUID id) {
 		FullProductDTO product = repository.findById(id);
 		repository.deleteById(id);
 

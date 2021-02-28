@@ -2,11 +2,12 @@ package es.urjc.code.ejem1.infrastructure.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Entity
 public class CompletedCartEntity {
   @Id
-  private Long cartId;
+  private UUID cartId;
 
   private double expenditure;
 
@@ -14,16 +15,16 @@ public class CompletedCartEntity {
     super();
   }
 
-  public CompletedCartEntity(Long cartId, double expenditure) {
+  public CompletedCartEntity(UUID cartId, double expenditure) {
     this.cartId = cartId;
     this.expenditure = expenditure;
   }
 
-  public Long getCartId() {
+  public UUID getCartId() {
     return cartId;
   }
 
-  public void setCartId(Long cartId) {
+  public void setCartId(UUID cartId) {
     this.cartId = cartId;
   }
 
