@@ -16,18 +16,15 @@ import java.util.UUID;
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	private ShoppingCartRepository shoppingCartRepository;
-	private ProductRepository productRepository;
 	private ValidationService validationService;
 	private ApplicationEventPublisher applicationEventPublisher;
 	
 	private ModelMapper mapper = new ModelMapper();
 
 	public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository,
-	        ProductRepository productRepository,
 	        ValidationService validationService,
 	        ApplicationEventPublisher applicationEventPublisher) {
 		this.shoppingCartRepository = shoppingCartRepository;
-		this.productRepository = productRepository;
 		this.validationService = validationService;
 		this.applicationEventPublisher = applicationEventPublisher;
 	}

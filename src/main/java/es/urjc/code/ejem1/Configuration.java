@@ -16,11 +16,9 @@ public class Configuration {
 	@Bean
 	public ShoppingCartService shoppingCartService(
 			SpringDataJPAShoppingCartRepositoryAdapter shoppingCartRepositoryAdapter,
-			SpringDataJPAProductRepositoryAdapter productRepositoryAdapter,
 			ApplicationEventPublisher applicationEventPublisher) {
 		return new ShoppingCartServiceImpl(
 				shoppingCartRepositoryAdapter,
-				productRepositoryAdapter,
 				new ValidationServiceImpl(),
 				applicationEventPublisher);
 	}

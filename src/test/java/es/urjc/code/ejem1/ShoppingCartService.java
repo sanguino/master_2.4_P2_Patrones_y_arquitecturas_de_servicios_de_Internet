@@ -43,11 +43,10 @@ public class ShoppingCartService {
 	void setUp() {
 		productRepository = mock(ProductRepository.class);
 		shoppingCartRepository = mock(ShoppingCartRepository.class);
-		
+		applicationEventPublisher = mock(ApplicationEventPublisher.class);
 		productService = new ProductServiceImpl();
 		shoppingCartService = new ShoppingCartServiceImpl(
 				shoppingCartRepository,
-		        productRepository,
 		        new ValidationServiceImpl(),
 		        applicationEventPublisher);
 	}
