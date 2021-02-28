@@ -15,21 +15,22 @@ import es.urjc.code.ejem1.domain.model.Product;
 import es.urjc.code.ejem1.domain.dto.ProductDTO;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import es.urjc.code.ejem1.domain.service.ProductServiceImpl;
+import org.springframework.context.ApplicationEventPublisher;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class ProductService {
 
-	private ProductRepository productRepository;
 	private ProductServiceImpl productService;
 
 	private ModelMapper mapper = new ModelMapper();
 
 	private static FullProductDTO createdProduct;
 
+	private ApplicationEventPublisher applicationEventPublisher;
+
 	@BeforeEach
 	void setUp() {
-		productRepository = mock(ProductRepository.class);
-		productService = new ProductServiceImpl();
+		productService = new ProductServiceImpl(applicationEventPublisher);
 	}
 
 	@Test
@@ -43,10 +44,9 @@ public class ProductService {
 		ProductDTO productDTO = mapper.map(product, ProductDTO.class);
 
 		createdProduct = productService.createProduct(productDTO);
-		verify(productRepository).save(createdProduct);
 	}
-
-	/*@Test
+/*
+	@Test
 	@Order(2)
 	void productCanBeDeleted() {
 		productService.deleteProduct(createdProduct.getId());

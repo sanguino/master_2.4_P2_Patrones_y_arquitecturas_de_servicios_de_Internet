@@ -19,8 +19,8 @@ public class Configuration {
 	}
 
 	@Bean
-	public ProductService productService() {
-		return new ProductServiceImpl();
+	public ProductService productService(ApplicationEventPublisher applicationEventPublisher) {
+		return new ProductServiceImpl(applicationEventPublisher);
 	}
 
 }
