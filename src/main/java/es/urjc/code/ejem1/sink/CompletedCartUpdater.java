@@ -3,6 +3,7 @@ package es.urjc.code.ejem1.sink;
 import es.urjc.code.ejem1.domain.dto.CompletedCartDTO;
 import es.urjc.code.ejem1.domain.model.CompletedCart;
 import es.urjc.code.ejem1.domain.repository.CompletedCartRepository;
+import es.urjc.code.ejem1.event.CompletedCartEvent;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,8 @@ public class CompletedCartUpdater {
 	}
 
 	@EventListener
-	public void saveCompletedCart(CompletedCart completedCart) {
+	public void saveCompletedCart(CompletedCartEvent event) {
+		CompletedCart completedCart = event.getCompletedCart();
 		completedCartRepository.save(mapper.map(completedCart, CompletedCartDTO.class));
 	}
 }

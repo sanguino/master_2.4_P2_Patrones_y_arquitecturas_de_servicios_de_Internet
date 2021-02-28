@@ -6,6 +6,7 @@ import es.urjc.code.ejem1.domain.dto.ShoppingCartDTO;
 import es.urjc.code.ejem1.domain.model.*;
 import es.urjc.code.ejem1.domain.repository.ProductRepository;
 import es.urjc.code.ejem1.domain.repository.ShoppingCartRepository;
+import es.urjc.code.ejem1.event.CompletedCartEvent;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 
@@ -43,22 +44,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public FullShoppingCartDTO updateShoppingCart(UUID id, ShoppingCartDTO shoppingCartDTO) {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartRepository.findById(id);
-
-		ShoppingCart shoppingCart = mapper.map(fullShoppingCartDTO, ShoppingCart.class);
-		ShoppingCart updateShoppingCart = mapper.map(shoppingCartDTO, ShoppingCart.class);
+	public FullShoppingCartDTO updateShoppingCart(FullShoppingCartDTO currentShoppingCartDTO, ShoppingCartDTO updateShoppingCartDTO) {
+		ShoppingCart currentShoppingCart = mapper.map(currentShoppingCartDTO, ShoppingCart.class);
+		ShoppingCart updateShoppingCart = mapper.map(updateShoppingCartDTO, ShoppingCart.class);
 
 		if (updateShoppingCart.getStatus() != null &&
-		        updateShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED) {
-			shoppingCart.setValidationService(validationService);
-			CompletedCart event = shoppingCart.validate();
+				updateShoppingCart.getStatus() == ShoppingCartStatus.COMPLETED &&
+				currentShoppingCart.getStatus() != ShoppingCartStatus.COMPLETED) {
+			currentShoppingCart.setValidationService(validationService);
+			CompletedCartEvent event = new CompletedCartEvent(this, currentShoppingCart.validate());
 			applicationEventPublisher.publishEvent(event);
 		}
 
-		FullShoppingCartDTO newShoppingCartDTO = mapper.map(shoppingCart, FullShoppingCartDTO.class);
-		
-		return saveShoppingCart(newShoppingCartDTO);
+		return mapper.map(currentShoppingCart, FullShoppingCartDTO.class);
 	}
 
 	@Override

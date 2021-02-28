@@ -87,16 +87,12 @@ public class ShoppingCart {
 	}
 
 	public CompletedCart validate() {
-		if (this.status != ShoppingCartStatus.COMPLETED) {
-
-			if (!validationService.validate(this.items)) {
+		if (!validationService.validate(this.items)) {
 				throw new ShoppingCartDontStockException("Not enough stock");
-			}
-
-			this.status = ShoppingCartStatus.COMPLETED;
-			return new CompletedCart(this.id, this.price);
 		}
-		return null;
+
+		this.status = ShoppingCartStatus.COMPLETED;
+		return new CompletedCart(this.id, this.price);
 	}
 
 }

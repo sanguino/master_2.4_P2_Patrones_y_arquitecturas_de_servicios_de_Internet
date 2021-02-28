@@ -61,7 +61,7 @@ public class ShoppingCartCommandController {
 	public ShoppingCartResponseDTO updateShoppingCart(
 	        @PathVariable String id,
 	        @Validated @RequestBody ShoppingCartRequestDTO shoppingCartRequestDTO) {
-		FullShoppingCartDTO fullShoppingCartDTO = shoppingService.updateShoppingCart(UUID.fromString(id),
+		FullShoppingCartDTO fullShoppingCartDTO = shoppingCartCommandService.updateShoppingCart(id,
 		        mapper.map(shoppingCartRequestDTO, ShoppingCartDTO.class));
 
 		return mapper.map(fullShoppingCartDTO, ShoppingCartResponseDTO.class);

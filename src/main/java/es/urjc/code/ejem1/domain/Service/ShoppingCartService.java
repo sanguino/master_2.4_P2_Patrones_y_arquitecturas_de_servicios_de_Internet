@@ -10,7 +10,7 @@ public interface ShoppingCartService {
 
 	FullShoppingCartDTO createShoppingCart();
 
-	FullShoppingCartDTO updateShoppingCart(UUID id, ShoppingCartDTO shoppingCartDTO);
+	FullShoppingCartDTO updateShoppingCart(FullShoppingCartDTO fullShoppingCartDTO, ShoppingCartDTO shoppingCartDTO);
 
 	FullShoppingCartDTO deleteShoppingCart(UUID id);
 
